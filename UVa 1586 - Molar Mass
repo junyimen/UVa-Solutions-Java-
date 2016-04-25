@@ -1,0 +1,43 @@
+import java.util.Scanner;
+
+
+public class Molar_Mass1586 {
+	public static final int C = 12010,H = 1008,O = 16000,N = 14010;
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int T = in.nextInt();
+		while(T-- != 0)
+		{
+			char[] arr = in.next().toCharArray();
+			String count = "";
+			int molecular = 0;
+			int ans = 0;
+			for(int i = 0; i < arr.length; i++)
+			{
+				count = "";
+				switch(arr[i])
+				{
+				case 'C':
+					molecular = C;
+					break;
+				case 'H':
+					molecular = H;
+					break;
+				case 'O':
+					molecular = O;
+					break;
+				case 'N':
+					molecular = N;
+					break;
+				}
+				while(i+1 != arr.length && arr[i+1] <= '9' && '0' <= arr[i+1])  {count += arr[i+1]; i += 1;}
+				if(count.equals("")) count = "1";
+				ans += Integer.parseInt(count) * molecular;
+			}
+		String print = String.valueOf(ans);
+		print = print.substring(0, print.length()-3) + "." + print.substring(print.length()-3);
+		System.out.println(print);
+		}
+	}	
+
+}
