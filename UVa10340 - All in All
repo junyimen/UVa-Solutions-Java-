@@ -1,0 +1,42 @@
+import java.util.Scanner;
+public class All_in_All10340 {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		while(in.hasNext())
+		{
+			char[] sub = in.next().toCharArray();
+			char[] s = in.next().toCharArray();
+			int i = 0,j = 0;
+			while(i < sub.length && j < s.length)
+			{
+				if(sub[i] == s[j])
+				{
+					if(i == sub.length-1)
+					{
+						System.out.println("Yes");
+						break;
+					}
+					if(j == s.length-1)
+					{
+						System.out.println("No");
+						break;
+					}
+					i++;
+					j++;
+				}
+				else
+				{
+					if(j == s.length-1)
+					{
+						System.out.println("No");
+						break;
+					}
+					j++;
+				}
+			}
+		}
+
+	}
+
+}
