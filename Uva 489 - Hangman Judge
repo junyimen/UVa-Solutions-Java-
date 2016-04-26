@@ -1,0 +1,58 @@
+
+import java.io.PrintWriter;
+import java.util.*;
+
+//489 - Hangman Judge
+public class Hangman_Judge {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		PrintWriter out = new PrintWriter(System.out);
+		while(in.hasNextInt())
+		{
+			int N = in.nextInt();
+			if(N == -1) break;
+			char[] word = in.next().toCharArray();
+			HashSet<Character> hax = new HashSet<Character>();
+			for(Character c: word)
+			{
+				hax.add(c);
+			}
+			
+			char[] gasses = in.next().toCharArray();
+			HashSet<Character> hax2 = new HashSet<Character>();
+			ArrayList<Character> hax3 = new ArrayList<Character>();
+			for(Character c: gasses)
+			{
+				if(!hax2.contains(c))
+				{
+					hax3.add(c);
+				}
+				hax2.add(c);
+			}
+			
+			int movesLeft = 7;
+			for(Character c: hax3)
+			{
+				if(hax.contains(c)){
+					hax.remove(c);
+				}
+				else
+					movesLeft--;
+				if(hax.size() == 0 || movesLeft == 0) break;
+			}
+			
+			out.println("Round " + N);
+			if(movesLeft < 1)
+				out.println("You lose.");
+			else if(hax.size() == 0)
+				out.println("You win.");
+			else
+				out.println("You chickened out.");
+		}
+		in.close();
+		out.close();
+	}
+
+}
+
