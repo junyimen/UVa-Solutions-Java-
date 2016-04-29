@@ -1,0 +1,52 @@
+import java.util.Scanner;
+public class Squares201 {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int T = 1;
+		while(in.hasNext())
+		{
+			int line,operates;
+			line = in.nextInt();
+			operates = in.nextInt();
+			boolean[][] H = new boolean[line+1][line+1];
+			boolean[][] V = new boolean[line+1][line+1];
+			while(operates-- != 0)
+			{
+				char operate = in.next().charAt(0);
+				int a = in.nextInt();
+				int b = in.nextInt();
+				if(operate == 'H')
+				{
+					H[a][b] = true;
+				}
+				else
+					V[b][a] = true;
+			}
+			if(T == 1) System.out.println("Problem #" + T++ + "\n");
+			else System.out.println("\n**********************************\n\nProblem #" + T++ + "\n");
+			boolean flag1 = true;
+			for(int l = 1; l < line; l++)
+			{
+				int count = 0;
+				for(int i = 1; i <= line-l; i++)
+				{
+					for(int j = 1; j <= line-l; j++)
+					{
+						boolean flag = true;
+						for(int h = 0; h < l; h++)
+							if(!H[i][j+h] || !H[i+l][j+h]){flag = false;break;}
+						for(int v = 0; v < l; v++)
+							if(!V[i+v][j] || !V[i+v][j+l]){flag = false;break;}
+							
+						if(flag) {count++; flag1 = false;}
+					}
+				}
+				if(count != 0)System.out.println(count + " square (s) of size " + l);
+			}
+			if(flag1)System.out.println("No completed squares can be found.");
+		}
+
+	}
+
+}
