@@ -1,0 +1,84 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+
+public class TheBlocksProblem {
+	static ArrayList<ArrayList<Integer>> ans;
+	static boolean flag = true;
+	static int pa,pb,ha,hb;
+	static int T;
+	public static void findBlock(int n)
+	{
+		for(int i = 0; i < ans.size(); i++)
+		{
+			for(int j = 0; j < ans.get(i).size(); j++)
+			{
+				if(n == ans.get(i).get(j))
+				{
+					if(flag){pa = i; ha = j;flag = !flag;}
+					else{pb =i; hb = j;flag = !flag;}
+				}
+			}
+		}
+	}
+	public static void print()
+	{
+		for(int i = 0; i < T; i++)
+		{
+			System.out.print(i + ":");
+			ArrayList<Integer> e = ans.get(i);
+			for(int j = 0; j < e.size(); j++)
+			{
+				System.out.print(" " + e.get(j));
+			}
+			System.out.println();
+		}
+	}
+	public static void pileOnto(int pa,int ha,int pb)
+	{
+		int l = ans.get(pa).size();
+		for(int i = ha; i < l; i++)
+		{
+			ans.get(pb).add(ans.get(pa).remove(ha));
+		}
+	}
+	public static void clearAbove(int p,int h)
+	{
+		int l = ans.get(p).size();
+		for(int i = h+1; i < l; i++)
+		{
+			ans.get(ans.get(p).get(h+1)).add(ans.get(p).remove(h+1));
+		}
+	}
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		while(in.hasNext())
+		{
+			T = in.nextInt();
+			ans = new ArrayList<ArrayList<Integer>>();
+			for(int i = 0; i < T; i++)
+			{
+				ArrayList<Integer> e = new ArrayList<Integer>();
+				e.add(i);
+				ans.add(e);
+			}
+			while(true)
+			{
+				String op1 = in.next();
+				if(op1.equals("quit"))break;
+				int a = in.nextInt();
+				String op2 = in.next();
+				int b = in.nextInt();
+				findBlock(a);
+				findBlock(b);
+				
+				if(pa == pb) continue;
+				if(op2.equals("onto")) clearAbove(pb,hb);
+				if(op1.equals("move")) clearAbove(pa,ha);
+				pileOnto(pa,ha,pb);
+			}
+			print();
+		}
+	}
+
+}
