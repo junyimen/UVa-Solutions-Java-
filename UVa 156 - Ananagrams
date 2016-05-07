@@ -1,0 +1,42 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Scanner;
+
+
+public class Ananagrams156 {
+	public static String repr(String s)
+	{
+		char[] r = s.toLowerCase().toCharArray();
+		Arrays.sort(r);
+		return new String(r);
+	}
+	public static void main(String[] args) {
+		HashMap<String,Integer> hm = new HashMap<String,Integer>();
+		ArrayList<String> word = new ArrayList<String>();
+		Scanner in = new Scanner(System.in);
+		while(in.hasNext())
+		{
+			String s = in.next();
+			if(s.equals("#"))break;
+			word.add(s);
+			String r = repr(s);
+			if(hm.get(r) == null) hm.put(r, 1);
+			else hm.replace(r, 1, 0);
+		}
+		
+		ArrayList<String> ans = new ArrayList<String>();
+		for(int i = 0; i < word.size(); i++)
+		{
+			if(hm.get(repr(word.get(i))) != null && hm.get(repr(word.get(i))) != 0) ans.add(word.get(i));
+		}
+		Collections.sort(ans);
+		for(String e:ans)
+		{
+			System.out.println(e);
+		}
+		
+	}
+
+}
