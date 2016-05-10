@@ -1,0 +1,61 @@
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
+public class Unixls400 {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		while(in.hasNext())
+		{
+			int t = in.nextInt();
+			LinkedList<String> al = new LinkedList<String>();
+			int maxn = 0;
+			for(int i = 0; i < t; i++)
+			{
+				String word = in.next();
+				if(maxn < word.length()) maxn = word.length();
+				al.add(word);
+			}
+			int col = (60-maxn)/(maxn+2) + 1;
+			int row = (t-1)/col + 1;
+			Collections.sort(al);
+			for(int len = 0; len < 60; len++)
+			{
+				System.out.print("-");
+			}
+			System.out.println();
+			for(int i = 0; i < row; i++)
+			{
+				for(int j = 0; j < col; j++)
+				{
+					int idx = j * row + i;
+					if(idx < t)
+					{
+						int l = al.get(idx).length();
+						String s = "";
+						if(j == col-1)
+						{
+							for(int k = l; k < maxn; k++)
+							{
+								s += " ";
+							}
+						}
+						else
+						{
+							for(int k = l; k < maxn+2; k++)
+							{
+								s += " ";
+							}
+						}
+						System.out.print(al.get(idx) + s);
+					}
+				}
+				System.out.println();
+			}
+		}
+	}
+
+}
