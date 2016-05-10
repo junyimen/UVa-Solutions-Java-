@@ -1,0 +1,54 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
+public class TeamQueue540 {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int kase = 0;
+		while(in.hasNext())
+		{
+			int t = in.nextInt();
+			if(kase != 0)System.out.println();
+			if(t == 0)break;
+			HashMap<Integer,Integer> hm = new HashMap<Integer,Integer>();
+			LinkedList<Integer> q = new LinkedList<Integer>();
+			LinkedList<LinkedList<Integer>> q2 = new LinkedList<LinkedList<Integer>>();
+			for(int i = 0; i < t; i++)
+			{
+				int count = in.nextInt();
+				LinkedList<Integer> e = new LinkedList<Integer>();
+				q2.add(e);
+				while(count-- != 0)
+				{
+					hm.put(in.nextInt(), i);
+				}
+			}
+			
+			System.out.println("Scenario #" + (++kase));
+			while(true)
+			{
+				String op = in.next();
+				if(op.equals("STOP"))break;
+				if(op.equals("ENQUEUE"))
+				{
+					int num = in.nextInt();
+					int num2 = hm.get(num);
+					if(q2.get(num2).isEmpty()) q.add(num2);
+					q2.get(num2).add(num);
+				}
+				else
+				{
+					int num = q.getFirst();
+					if(q2.get(num).size() != 0)
+					System.out.println(q2.get(num).remove());
+					if(q2.get(num).size() == 0) q.remove();
+					
+				}
+			}
+		}
+	}
+
+}
