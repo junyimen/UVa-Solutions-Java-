@@ -1,0 +1,45 @@
+import java.util.LinkedList;
+import java.util.Scanner;
+
+
+public class AlignmentOfCode1593 {
+	
+	public static void main(String[] args) {
+		LinkedList<LinkedList<String>> str = new LinkedList<LinkedList<String>>();
+		int[] maxn = new int[1000];
+		Scanner in = new Scanner(System.in);
+		while(in.hasNext())
+		{
+			LinkedList<String> row = new LinkedList<String>();
+			String[] line = in.nextLine().split(" ");
+			//if(line[0].equals("123"))break;
+			for(int i = 0; i < line.length; i++)
+			{
+				if(!line[i].equals(""))
+				row.add(line[i]);
+			}
+			for(int i = 0; i < row.size(); i++)
+			{
+				if(maxn[i] < row.get(i).length()) maxn[i] = row.get(i).length();
+			}
+			str.add(row);
+		}
+		for(int i = 0; i < str.size(); i++)
+		{
+			LinkedList<String> line = str.get(i);
+			for(int j = 0; j < line.size(); j++)
+			{
+				String word = line.get(j);
+				String space = "";
+				for(int k = 0; k < maxn[j]-(word.length())+1; k++) space += " ";
+				if(j != line.size()-1)
+				System.out.print(word + space);
+				else
+					System.out.print(word);
+			}
+			System.out.println();
+		}
+		
+	}
+
+}
