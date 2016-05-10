@@ -1,0 +1,33 @@
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+
+
+public class UglyNumbers {
+	static int[] coeff = {2,3,5};
+	public static void main(String[] args) {
+		HashSet<Long> hs = new HashSet<Long>();
+		LinkedList<Long> al = new LinkedList<Long>();
+		al.add(1l);
+		hs.add(1l);
+		for(int i = 1; i <= 1500; i++)
+		{
+			Collections.sort(al);
+			long num = al.remove();
+			if(i == 1500)
+			{
+				System.out.println("The 1500'th ugly number is " + num + ".");
+			}
+			for(int j = 0; j < 3; j++)
+			{
+				long t = num * coeff[j];
+				if(!hs.contains(t)) 
+				{
+					hs.add(t);
+					al.add(t);
+				}
+			}
+		}
+	}
+
+}
